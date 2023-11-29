@@ -1,0 +1,45 @@
+[versions]
+kotlin = "1.9.20"
+kotlinx = "1.7.3"
+serialization = "1.6.1"
+android = "8.1.2"
+compose = "1.5.10"
+koin = "3.5.2-RC1"
+koin-compose = "1.1.1-RC1"
+ktor = "2.3.6"
+napier = "2.6.1"
+gson = "2.10.1"
+kprefs = "0.12.1"
+
+[libraries]
+serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+serialization-protobuf = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-protobuf", version.ref = "serialization" }
+serialization-preferences = { group = "net.edwardday.serialization", name = "kprefs", version.ref = "kprefs" }
+
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin-compose" }
+
+jvm-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
+ktor-client-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-websockets = { group = "io.ktor", name = "ktor-client-websockets", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+napier = { group = "io.github.aakira", name = "napier", version.ref = "napier" }
+
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+android-library = { id = "com.android.library", version.ref = "android" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+[bundles]
+
