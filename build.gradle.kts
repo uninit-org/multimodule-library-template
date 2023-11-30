@@ -22,7 +22,6 @@ buildscript {
 }
 
 allprojects {
-
     tasks.withType(KotlinCompile::class).all {
         kotlinOptions {
             freeCompilerArgs += "-Xexpect-actual-classes"
@@ -33,20 +32,32 @@ allprojects {
     extra["root-maven-url"] = "https://repo.uninit.dev/"
     val ci = System.getenv("CI") != null
     val isRelease = System.getenv("GITHUB_EVENT_NAME") == "release"
+    var repo = "releases"
 
     version = "0.0.1"
     if (ci && !isRelease) {
-        version = "${version.toString()}-${SimpleDateFormat("YYYYMMdd").format(Date(System.currentTimeMillis()))}-${System.getenv("GITHUB_SHA").slice(0..6)}" // todo: add date
+        repo = "snapshots"
+        version = "${version}-${SimpleDateFormat("YYYYMMdd").format(Date(System.currentTimeMillis()))}-${System.getenv("GITHUB_SHA").slice(0..6)}" // todo: add date
     }
     if (!ci) {
-        version = "${version.toString()}-LOCAL#${System.currentTimeMillis()}"
+        repo = "local"
+        version = "${version}-${System.currentTimeMillis()}#${InetAddress.getLocalHost().hostName}"
     }
+
+    /*
+     * If SNAPSHOT:
+     * version = "VERSION-YYYYMMdd-HASH"
+     * If not CI:
+     * version = "VERSION-TIMESTAMP#HOSTNAME"
+     * If RELEASE:
+     * version = "VERSION"
+     */
 
     val mavenRepo: PublishingExtension.() -> Unit = {
         repositories {
             maven {
                 name = "uninit"
-                url = uri("${extra["root-maven-url"]}${if (!isRelease) "snapshots" else "releases"}")
+                url = uri("${extra["root-maven-url"]}$repo")
                 credentials {
                     username = "admin"
                     password = System.getenv("REPOSILITE_PASSWORD")
