@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat
 import java.util.*
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
@@ -22,8 +23,10 @@ buildscript {
 
 allprojects {
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
-        kotlinOptions { freeCompilerArgs += "-Xexpect-actual-classes" }
+    tasks.withType(KotlinCompile::class).all {
+        kotlinOptions {
+            freeCompilerArgs += "-Xexpect-actual-classes"
+        }
     }
 
     group = "uninit"
