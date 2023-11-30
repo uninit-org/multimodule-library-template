@@ -21,6 +21,11 @@ buildscript {
 }
 
 allprojects {
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
+        kotlinOptions { freeCompilerArgs += "-Xexpect-actual-classes" }
+    }
+
     group = "uninit"
     extra["root-maven-url"] = "https://repo.uninit.dev/"
     val ci = System.getenv("CI") != null
